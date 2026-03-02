@@ -1,0 +1,387 @@
+/* CSS Reset and Variables */
+:root {
+    --bg-dark: #0f172a;
+    --bg-mesh-1: rgba(99, 102, 241, 0.15);
+    --bg-mesh-2: rgba(168, 85, 247, 0.15);
+    
+    --panel-bg: rgba(30, 41, 59, 0.6);
+    --panel-border: rgba(255, 255, 255, 0.08);
+    
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    
+    --accent: #8b5cf6;
+    --accent-hover: #7c3aed;
+    --accent-glow: rgba(139, 92, 246, 0.4);
+
+    --twitch-bg: #18181b;
+    --twitch-text: #efeff1;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(ellipse at 10% 20%, var(--bg-mesh-1) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 80%, var(--bg-mesh-2) 0%, transparent 50%);
+    color: var(--text-main);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* App Layout */
+.app-container {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+header {
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin: 0 0 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: linear-gradient(135deg, #c4b5fd, #8b5cf6, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+header p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+/* Glassmorphism Panels */
+.glass-panel {
+    background: var(--panel-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--panel-border);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.controls-panel h2 {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--panel-border);
+    padding-bottom: 1rem;
+}
+
+/* Form Elements */
+.input-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.input-group input[type="text"],
+.input-group textarea {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    resize: vertical;
+}
+
+.input-group input[type="text"]:focus,
+.input-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+/* Custom Color Picker */
+.color-picker-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+}
+
+input[type="color"] {
+    -webkit-appearance: none;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: none;
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: 2px solid var(--panel-border);
+    border-radius: 50%;
+}
+
+.color-hex {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+/* Custom Toggle Switch */
+.toggle-group {
+    margin-bottom: 1.2rem;
+}
+
+.toggle-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+}
+
+.toggle-text {
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.toggle-switch {
+    position: relative;
+    width: 44px;
+    height: 24px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(15, 23, 42, 0.8);
+    transition: .4s;
+    border-radius: 24px;
+    border: 1px solid var(--panel-border);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 3px;
+    background-color: var(--text-muted);
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+    background-color: #fff;
+}
+
+/* Buttons */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.6);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-primary.loading {
+    opacity: 0.8;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.preview-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* The Twitch Comment Exact Styling */
+.preview-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    overflow: hidden;
+    /* Optional grid background pattern to imply transparency before download */
+    background-image: radial-gradient(var(--panel-border) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.twitch-comment-box {
+    background-color: var(--twitch-bg);
+    color: var(--twitch-text);
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 24px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-align: left;
+    max-width: 300px;
+    width: max-content;
+    word-wrap: break-word;
+    /* Ensures no inherited styles corrupt the image */
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.twitch-comment-line {
+    display: inline;
+}
+
+.badges {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.twitch-badge {
+    height: 18px;
+    width: 18px;
+    vertical-align: middle;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.username {
+    font-weight: 700;
+    /* User color is applied via JS */
+}
+
+.colon {
+    font-weight: 700;
+    margin-right: 4px;
+}
+
+.message {
+    color: var(--twitch-text);
+    word-break: break-word;
+}
+
+/* Animations */
+.fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.fade-in-down {
+    animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsiveness */
+@media (max-width: 900px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .app-container {
+        padding: 1rem;
+    }
+    
+    .preview-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .twitch-comment-box {
+        width: 100%;
+    }
+}
